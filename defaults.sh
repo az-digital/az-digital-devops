@@ -15,7 +15,7 @@ if [[ -z "${REPO_NAME}" ]]; then
 fi
 
 # Remove direct members
-echo "[+] Removing any direct membershit to ${FULL_NAME}"
+echo "[+] Removing any direct memberships for repo"
 for USER in $(gh api '/repos/az-digital/az-digital-devops/collaborators?affiliation=direct' | jq -r '.[] | .login' | tr '\n' ' '); do
   echo "  [+] Removing ${USER}"
   gh api --silent -XDELETE "/repos/${ORG}/${REPO_NAME}/collaborators/${USER}"
