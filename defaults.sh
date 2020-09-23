@@ -10,7 +10,7 @@ REPO_NAME="${REPO_NAME:-$1}"
 FULL_NAME="${ORG}/${REPO_NAME}"
 
 if [[ -z "${REPO_NAME}" ]]; then
-  echo "Please specify the name of the new repo"
+  echo "Please specify the name of the repo"
   exit 1
 fi
 
