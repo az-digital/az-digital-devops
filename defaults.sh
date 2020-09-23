@@ -16,7 +16,7 @@ fi
 
 # Remove direct members
 echo "[+] Removing any direct memberships for repo"
-for USER in $(gh api '/repos/az-digital/az-digital-devops/collaborators?affiliation=direct' | jq -r '.[] | .login' | tr '\n' ' '); do
+for USER in $(gh api "/repos/${ORG}/${REPO_NAME}/collaborators?affiliation=direct" | jq -r '.[] | .login' | tr '\n' ' '); do
   echo "  [+] Removing ${USER}"
   gh api --silent -XDELETE "/repos/${ORG}/${REPO_NAME}/collaborators/${USER}"
 done
