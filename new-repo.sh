@@ -20,6 +20,8 @@ gh repo create "${FULL_NAME}" \
 
 (
   cd "${REPO_NAME}"
+  SSH_URL=$(gh api "/repos/${ORG}/${REPO_NAME}" | jq -r '.ssh_url')
+  git remote set-url origin "${SSH_URL}"
   git pull origin main
   git branch --set-upstream-to=origin/main main
 )
