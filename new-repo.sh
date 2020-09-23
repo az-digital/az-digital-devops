@@ -4,6 +4,7 @@ set -e
 
 ORG="az-digital"
 TEMPLATE="template"
+DEFAULT_BRANCH="main"
 
 REPO_NAME="${1}"
 FULL_NAME="${ORG}/${REPO_NAME}"
@@ -34,9 +35,9 @@ gh api --silent -XPUT "/orgs/${ORG}/teams/maintainers/repos/${ORG}/${REPO_NAME}"
 gh api --silent -XPUT "/orgs/${ORG}/teams/developers/repos/${ORG}/${REPO_NAME}" \
   --raw-field "permission=push"
 
-# Set branch permissions for main branch
+# Set branch permissions for default branch
 jq -n '{"required_status_checks": {"strict": true, "contexts": []}, "enforce_admins": true, "required_pull_request_reviews": {"dismiss_stale_reviews": true, "require_code_owner_reviews": true, "required_approving_review_count": 2}, "required_linear_history": true, "restrictions": {"users":[], "teams": []}}' | \
-gh api --silent -H "Accept: application/vnd.github.luke-cage-preview+json" -XPUT "/repos/${ORG}/${REPO_NAME}/branches/main/protection" --input -
+gh api --silent -H "Accept: application/vnd.github.luke-cage-preview+json" -XPUT "/repos/${ORG}/${REPO_NAME}/branches/${DEFAULT_BRANCH}/protection" --input -
 
 # Open new repo in browser
 gh repo view --web "${FULL_NAME}"
