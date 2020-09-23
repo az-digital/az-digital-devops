@@ -35,7 +35,7 @@ gh api --silent \
 
 # Set branch permissions for default branch
 echo "[+] Setting branch permissions for ${DEFAULT_BRANCH}"
-jq -n '{"required_status_checks": {"strict": true, "contexts": []}, "enforce_admins": true, "required_pull_request_reviews": {"dismiss_stale_reviews": true, "require_code_owner_reviews": true, "required_approving_review_count": 2}, "required_linear_history": true, "restrictions": {"users":[], "teams": []}}' | \
+jq -n '{"required_status_checks": {"strict": true, "contexts": []}, "enforce_admins": true, "required_pull_request_reviews": {"dismiss_stale_reviews": true, "require_code_owner_reviews": true, "required_approving_review_count": 2}, "required_linear_history": true, "restrictions": {"users":[], "teams": ["maintainers"]}}' | \
 gh api --silent \
   -H "Accept: application/vnd.github.luke-cage-preview+json" \
   -XPUT "/repos/${ORG}/${REPO_NAME}/branches/${DEFAULT_BRANCH}/protection" \
