@@ -18,8 +18,6 @@ gh repo create "${FULL_NAME}" \
   --public \
   --template "${ORG}/${TEMPLATE}"
 
-git clone "git@github.com:${ORG}/${REPO_NAME}.git"
-
 #(
 #  cd "${REPO_NAME}"
 #  SSH_URL=$(gh api "/repos/${ORG}/${REPO_NAME}" | jq -r '.ssh_url')
