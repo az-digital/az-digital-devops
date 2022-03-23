@@ -15,17 +15,8 @@ if [[ -z "${REPO_NAME}" ]]; then
 fi
 
 gh repo create "${FULL_NAME}" \
-  --confirm \
   --public \
   --template "${ORG}/${TEMPLATE}"
-
-(
-  cd "${REPO_NAME}"
-  SSH_URL=$(gh api "/repos/${ORG}/${REPO_NAME}" | jq -r '.ssh_url')
-  git remote set-url origin "${SSH_URL}"
-  git pull origin main
-  git branch --set-upstream-to=origin/main main
-)
 
 # Apply the defaults
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
